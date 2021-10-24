@@ -64,3 +64,60 @@ import OneSignal from 'react-native-onesignal';
 // ...
 OneSignal.setAppId('ONESIGNAL_APP_ID'); // Troque ONESIGNAL_APP_ID pelo seu APPID obtido no passo anterior.
 ```
+- Salve as alterações e pronto, o app já está configurado.
+**Fim do Passo 3**
+
+## Passo 4 - Gerar APK Release
+> Chegou uma parte da qual eu realmente queria poupar você, pois para isso terá que configurar o ambiente React Native na sua máquina, infelizmente não tem como escapar dessa parte, pelo menos a primeiro momento, provavelmente na versão 2.0 não será necessário mais esse passo estressante pois deixarei o apk anexado para download.
+- Primeiro você precisa configurar o ambiente React Native na sua máquina, para isso eu recomendo seguir esse tutorial da [Rocketseat](https://react-native.rocketseat.dev/) tente criar e rodar um projeto para validar se o ambiente está configurado corretamente.
+- Agora dentro da pasta do projeto.
+```shell
+cd android && ./gradlew clean && ./gradlew assembleRelease
+```
+- E pronto o apk release está em **android/app/build/outputs/apk/release/app-release.apk**
+- Passe o apk para seu aparelho e instale.
+**Fim do Passo 4**
+
+## Passo 5 - Criar ShellScript para enviar as notificações
+> O que faremos aqui nada mais é do que um arquivo **.sh** que faz uma requisição para a api do **OneSignal** enviando Título e uma Descrição para nossa notificação que vamos receber no aplicativo que acabamos de instalar.
+- Dentro de qualquer pasta do seu Terminal crie o arquivo digitando os comandos.
+```shell
+touch send-notification.sh
+```
+- Agora vamos dar permissão de execução para o arquivo.
+```shell
+chmod +x send-notification.sh
+```
+- Agora podemos executar nosso script dessa forma, porém ele não vai fazer nada pois não escrevemos nada nele ainda.
+```shell
+./send-notification.sh
+```
+- Abra o arquivo **send-notification.sh** com o editor de texto de sua preferência no meu caso sempre uso o [vim](https://www.vim.org/) para edições rápidas de texto.
+- Dentro do arquivo começamos a escrever nosso script que será interpretado pelo **bash** do linux.
+```bash
+ #!/bin/bash
+
+ONE_SIGNAL_API_TOKEN="one_signal_api_token"
+APP_ID="seu_app_id" # O mesmo app_id que você colocou dentro do index.js no app.
+MESSAGE_TITLE="$1" # Titulo recebido como 1º por parametro
+MESSAGE_DESCRIPTION="$2" # Descrição recebida como 2º parametro
+
+curl --include \
+     --request POST \
+     --header "Content-Type: application/json; charset=utf-8" \
+     --header "Authorization: Basic $ONE_SIGNAL_API_TOKEN" \
+     --data-binary "{\"app_id\": \"$APP_ID\",
+\"contents\": {\"en\": \"$MESSAGE_DESCRIPTION\"},
+\"headings\": {\"en\": \"$MESSAGE_TITLE\"},
+\"included_segments\": [\"Subscribed Users\"]}" \
+     https://onesignal.com/api/v1/notifications
+```
+- Pronto, agora para funcionar realmente só precisamos do token da api do **OneSignal**.
+- Volte para a página do OneSignal na Web entre no seu aplicativo que foi configurado vá em **Settings**.
+- Depois em **Keys & IDs** e copie o valor de **Rest API Key**.
+- Agora dentro do nosso script troque **one_signal_api_token** por sua **Rest API Key**.
+- Agora vamos fazer nosso primeiro teste.
+```bash
+./send-notification "Linux Push Notification" "Teste de notificação"
+```
+Se a notificação chegou no seu celular está tudo certo e você está pronto para usar o App parabéns!!
