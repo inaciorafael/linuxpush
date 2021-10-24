@@ -27,3 +27,40 @@ Lembrando sempre que esse é um app individual para uso pessoal e não profissio
 - Modificar o código do aplicativo adicionando o **APPID** obtido no passo anterir, dentro da configuração **OneSignal** no arquivo index.js na pasta raíz do projeto.
 - Gerar um apk release do app.
 - Criar um shellscript para enviar as notificações.
+
+## Passo 1 - Criando conta no Firebase
+- Criar a conta no **Firebase** é simples acesse o [site](https://console.firebase.google.com/u/0/?hl=pt) loge com a sua conta ou crie uma se quiser, acesse o console do firebase e clique em adicionar projeto depois disso é só seguir os passos, não precisa configurar nada, selecine **android** quando perguntar sobre a plataforma, dê o nome que você quiser para o projeto.
+- Agora dentro do projeto criado, ao lado de **Visão Geral do Projeto** do lado superior esquerdo você irá ver uma engranagem, clique nela, entre em configurações gerais do projeto.
+- Agora você deve estar na aba **Geral**, clique ao lado **Cloud Messaging**.
+- Chegamos a parte importante, anote em qualquer lugar de sua preferência a **Chave do servidor** e o **ID do remetente** usaremos esses valores na configuração do **OneSignal**.
+**Fim do Passo 1**
+
+## Passo 2 - Criar Conta e Configuração OneSignal
+- Entre no [site](https://app.onesignal.com/) do **OneSignal** e faça o login ou crie uma conta.
+- Clique em **New App**, digite um nome, pode ser qualquer nome. Selecione a plataforma **Android** e clique em next.
+- Irá aparecer um formulário pedindo a **Firebase Server Key(Chave do servidor)** e **Firebase Sender ID(ID do remetente)**.
+- Após preencher o formulário e clicar em next selecione React Native/Expo e clique em Save/Continue.
+- Agora copie o **APPID** e anote em um local de sua preferência e deixe a tela onde está.
+**Fim do Passo 2**
+
+## Passo 3 - Adicionando AppID no código do Linux Push Notification
+- Primeiro vamos clonar o repositório
+```shell
+git clone git@github.com:inacio0196/linuxpush.git
+cd linuxpush
+```
+- Dentro do projeto, vamos instalar as dependências
+```shell
+yarn
+```
+- Agora dentro do arquivo **./index.js**, vamos editar a configuração do **OneSignal**
+```javascript
+import {AppRegistry} from 'react-native';
+// ...
+// ...
+import OneSignal from 'react-native-onesignal';
+
+// ...
+// ...
+OneSignal.setAppId('ONESIGNAL_APP_ID'); // Troque ONESIGNAL_APP_ID pelo seu APPID obtido no passo anterior.
+```
