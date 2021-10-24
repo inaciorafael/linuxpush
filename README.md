@@ -1,11 +1,21 @@
 # Linux Push Notifications
 
-<img src="android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
+<p align="center">
+ <img src="android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" heigth="200" width="200" />
+</p>
 
 > Aplicativo desenvolvido em [React Native](https://reactnative.dev/) que recebe notificações push disparadas por **ShellScript** utilizando [OneSignal](https://onesignal.com/) + [Firebase](https://firebase.google.com/?hl=pt).
 > Minha principal motivação para construir o app foi depois de ter descoberto o app [Pushover](https://play.google.com/store/apps/details?id=net.superblock.pushover) que faz exatamente isso, permite com que mandemos notificações push para grupos de aparelhos via script(o app **Linux Push Notifications** de longe não faz ném metade do que o **Pushover** faz, meu aplicativo ta mais pra um fangame, porém pretendo tornar o app tão útil quanto o app que inspirou esse projeto).
 
 O app foi construído e pensado apenas para **Android**, então provavelmente se você quiser utilizar dentro do **Ios** terá que modificar o código fonte mais do que o mínimo para utilizar o aplicativo.
+
+<p align="center">
+ <img src=".github/assets/send-notification.png" alt="send-notification-command" align="center" heigth="500" width="500" />
+</p>
+
+Badge                      |  Notification
+:-------------------------:|:-------------------------:
+![](.github/assets/icon-badge.png)  |  ![](.github/assets/notification.png)
 
 > ## Versão 1.0
 > A versão 1.0 do aplicativo tem apenas uma funcionalidade que é receber as notificações disparadas pelo seu **shellscript** ou requisição via **JavaScript**, **PHP**, **Python** etc. [Saiba mais lendo a documentação da api rest do OneSignal](https://documentation.onesignal.com/reference/create-notification#example-code---create-notification)
