@@ -45,12 +45,12 @@ Lembrando sempre que esse é um app individual para uso pessoal e não profissio
 
 ## Passo 3 - Adicionando AppID no código do Linux Push Notification
 - Primeiro vamos clonar o repositório
-```shell
+```bash
 git clone git@github.com:inacio0196/linuxpush.git
 cd linuxpush
 ```
 - Dentro do projeto, vamos instalar as dependências
-```shell
+```bash
 yarn
 ```
 - Agora dentro do arquivo **./index.js**, vamos editar a configuração do **OneSignal**
@@ -71,7 +71,7 @@ OneSignal.setAppId('ONESIGNAL_APP_ID'); // Troque ONESIGNAL_APP_ID pelo seu APPI
 > Chegou uma parte da qual eu realmente queria poupar você, pois para isso terá que configurar o ambiente React Native na sua máquina, infelizmente não tem como escapar dessa parte, pelo menos a primeiro momento, provavelmente na versão 2.0 não será necessário mais esse passo estressante pois deixarei o apk anexado para download.
 - Primeiro você precisa configurar o ambiente React Native na sua máquina, para isso eu recomendo seguir esse tutorial da [Rocketseat](https://react-native.rocketseat.dev/) tente criar e rodar um projeto para validar se o ambiente está configurado corretamente.
 - Agora dentro da pasta do projeto.
-```shell
+```bash
 cd android && ./gradlew clean && ./gradlew assembleRelease
 ```
 - E pronto o apk release está em **android/app/build/outputs/apk/release/app-release.apk**
@@ -81,15 +81,15 @@ cd android && ./gradlew clean && ./gradlew assembleRelease
 ## Passo 5 - Criar ShellScript para enviar as notificações
 > O que faremos aqui nada mais é do que um arquivo **.sh** que faz uma requisição para a api do **OneSignal** enviando Título e uma Descrição para nossa notificação que vamos receber no aplicativo que acabamos de instalar.
 - Dentro de qualquer pasta do seu Terminal crie o arquivo digitando os comandos.
-```shell
+```bash
 touch send-notification.sh
 ```
 - Agora vamos dar permissão de execução para o arquivo.
-```shell
+```bash
 chmod +x send-notification.sh
 ```
 - Agora podemos executar nosso script dessa forma, porém ele não vai fazer nada pois não escrevemos nada nele ainda.
-```shell
+```bash
 ./send-notification.sh
 ```
 - Abra o arquivo **send-notification.sh** com o editor de texto de sua preferência no meu caso sempre uso o [vim](https://www.vim.org/) para edições rápidas de texto.
@@ -118,6 +118,6 @@ curl --include \
 - Agora dentro do nosso script troque **one_signal_api_token** por sua **Rest API Key**.
 - Agora vamos fazer nosso primeiro teste.
 ```bash
-./send-notification "Linux Push Notification" "Teste de notificação"
+./send-notification.sh "Titulo da Notificação" "Descrição da Notificação"
 ```
 Se a notificação chegou no seu celular está tudo certo e você está pronto para usar o App parabéns!!
