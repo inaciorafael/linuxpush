@@ -1,5 +1,5 @@
 # ENV
-.env
+.env.development
 # OSX
 #
 .DS_Store
